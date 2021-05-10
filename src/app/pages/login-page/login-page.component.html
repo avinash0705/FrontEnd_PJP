@@ -1,0 +1,81 @@
+<div class="login-page" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="50px">
+    <div class="logo-container" fxFlexAlign="center">
+        <app-logo></app-logo>
+    </div>
+    <mat-card *ngIf="loginUI" fxFlexAlign="center">
+
+        <div style="display: flex;margin-bottom: 20px;">
+
+            <button mat-button color="secondary"
+                        class="login-field" (click)="changeToLoginUI()" type="submit">
+                    login
+            </button>
+            <button mat-raised-button color="secondary"
+            class="login-field" (click)="changeToSignupUi()" type="submit">
+                signup
+            </button>
+        </div>
+
+            
+
+        <mat-card-title>
+            Login to Your Inventory
+        </mat-card-title>
+        <mat-card-content>
+            <form (keyup.enter)="login(email, password)">
+                <mat-form-field class="login-field">
+                    <input matInput placeholder="Email" name="email" [(ngModel)]="email" type="email" autocomplete="username email"/>
+                </mat-form-field>
+                <mat-form-field class="login-field">
+                    <input matInput placeholder="Password" name="password" [(ngModel)]="password" type="password" autocomplete="current-password"/>
+                </mat-form-field>
+            </form>
+            <mat-error [textContent]="errorMessage"></mat-error>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary"
+                    class="login-field" (click)="login(email, password)" type="submit">
+                Login
+            </button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card *ngIf="signUpUI" fxFlexAlign="center">
+        <div style="display: flex;margin-bottom: 20px;">
+
+            <button mat-raised-button color="secondary"
+                        class="login-field" (click)="changeToLoginUI()" type="submit">
+                    login
+            </button>
+            <button mat-button color="secondary"
+            class="login-field" (click)="changeToSignupUi()" type="submit">
+                signup
+            </button>
+        </div>
+        
+        <mat-card-title>
+            Sign UP and create your first Inventory
+        </mat-card-title>
+        <mat-card-content>
+            <form (keyup.enter)="signup(name,email, password)">
+                <mat-form-field class="login-field">
+                    <input matInput placeholder="Name" name="name" [(ngModel)]="name" type="text" autocomplete="username name"/>
+                </mat-form-field>
+                <mat-form-field class="login-field">
+                    <input matInput placeholder="Email" name="email" [(ngModel)]="email" type="email" autocomplete="username email"/>
+                </mat-form-field>
+                <mat-form-field class="login-field">
+                    <input matInput placeholder="Password" name="password" [(ngModel)]="password" type="password" autocomplete="current-password"/>
+                </mat-form-field>
+            </form>
+            <mat-error [textContent]="errorMessage"></mat-error>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="primary"
+                    class="login-field" (click)="signup(name,email, password)" type="submit">
+                Sign Up
+            </button>
+        </mat-card-actions>
+    </mat-card>
+
+    
+</div>
