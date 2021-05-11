@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { CrudService } from '../core/services/http/crud.service';
 import { StorageKey } from '../core/services/storage/storage.model';
 import { StorageService } from '../core/services/storage/storage.service';
-const { AUTH_TOKEN } = StorageKey;
+const { AUTH_TOKEN, USER } = StorageKey;
 
 @Injectable({
     providedIn: 'root',
@@ -24,8 +24,14 @@ export class AuthService extends CrudService {
 
     public async login(email: string, password: string) {
         try {
-            this.token = await this.post({ email, password });
+            this.endpoint = 'user/login';
+            var response = await this.post({ email, password });
+            this.token = response.token;
+
             this.storage.save(AUTH_TOKEN, this.token);
+            this.storage.save(USER,response.user)
+            if(this.isLogged())
+            this.redirectUrl = 'nav';
             return this.redirectUrl;
         } catch (error) {
             console.error('Error during login request', error);
@@ -33,11 +39,12 @@ export class AuthService extends CrudService {
         }
     }
 
-    public async signup(name: string, email: string, password: string) {
+    public async signup(username: string, email: string, password: string) {
         try {
-            console.log('in the auth sign up call');
-            // await this.post({name, email, password });
-            return '';
+            this.endpoint = 'user/register';
+            var response = await this.post({username, email, password });
+            console.log('signup response is',response)
+            return response;
         } catch (error) {
             console.error('Error during signup request', error);
             return Promise.reject(error);
@@ -69,6 +76,6 @@ export class AuthService extends CrudService {
     }
 
     public isLogged(): boolean {
-        return this.token.length > 0;
+        return this.token!='';
     }
 }

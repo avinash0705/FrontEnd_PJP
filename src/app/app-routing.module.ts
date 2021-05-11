@@ -1,15 +1,13 @@
 import { NgModule } from '@angular/core';
 import {
-    Routes,
-    RouterModule,
     PreloadAllModules,
-    RouteReuseStrategy,
+    RouteReuseStrategy, RouterModule, Routes
 } from '@angular/router';
-import { navRoutes, sideNavPath } from './nav-routing';
-import { NavComponent } from './core/components/nav/nav.component';
 import { AuthGuard } from './auth/auth.guard';
+import { NavComponent } from './core/components/nav/nav.component';
 import { CustomRouteReuseStrategy } from './core/nav-reuse-strategy';
 import { NavGuard } from './core/nav.guard';
+import { navRoutes, sideNavPath } from './nav-routing';
 
 const routes: Routes = [
     {

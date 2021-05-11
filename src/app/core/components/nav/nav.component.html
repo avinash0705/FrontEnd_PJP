@@ -2,6 +2,9 @@
     <mat-sidenav mode="side" [opened]="isOpen">
         <div class="sidenav-logo-container">
             <app-logo></app-logo>
+            <div class="user">
+               Welcome, {{user.username}}
+            </div>
         </div>
         <mat-nav-list>
             <app-nav-menu-item *ngFor="let navigationItem of getNavigationItems()"

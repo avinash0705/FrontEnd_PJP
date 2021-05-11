@@ -26,7 +26,7 @@ export class LoginPageComponent implements OnInit {
 
     public async login(email: string, password: string) {
         try {
-            const url = (await this.authService.mockLogin(
+            const url = (await this.authService.login(
                 email,
                 password,
             )) as string;
@@ -39,13 +39,13 @@ export class LoginPageComponent implements OnInit {
 
     public async signup(name: string, email: string, password: string) {
         try {
-            const url = (await this.authService.signup(
+            
+            const response = (await this.authService.signup(
                 name,
                 email,
                 password,
-            )) as string;
-            console.log('reutnr from auth signup', url);
-            this.changeToLoginUI();
+            ))as string;
+            this.changeToLoginUI();            
         } catch (e) {
             this.errorMessage = 'Something Went Wrong!';
             console.error('Unable to Signup!\n', e);

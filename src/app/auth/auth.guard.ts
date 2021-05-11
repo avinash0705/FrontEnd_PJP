@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
     ActivatedRouteSnapshot,
-    RouterStateSnapshot,
-    UrlTree,
+
+
     CanActivate,
-    Router,
+    Router, RouterStateSnapshot,
+    UrlTree
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
@@ -27,6 +28,7 @@ export class AuthGuard implements CanActivate {
             this.authService.redirectUrl = null;
             return true;
         }
+        console.log('not logged in')
         this.authService.redirectUrl = state.url;
         this.router.navigate(['']);
         return false;

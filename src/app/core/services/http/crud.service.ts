@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 export abstract class CrudService<T = any> {
     abstract endpoint;
-    url = '';
+    url = 'http://localhost:5000';
 
     protected constructor(protected http: HttpClient) {}
 
@@ -35,6 +35,7 @@ export abstract class CrudService<T = any> {
         } catch (error) {
             response = this.errorHandler('POST', error);
         }
+        console.log('response is', response)
         return response;
     }
 
