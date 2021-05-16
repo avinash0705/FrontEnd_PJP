@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content" *ngIf="!isLoading && !showInventory">
 
 
 
@@ -15,14 +15,14 @@
          text-align: center;
          height: 7vw;
          padding-top: 2vw;">
-          <span style="font-size: 2vw;">{{inv.name}}</span>
+          <span style="font-size: 2vw;" (click)="openInventory(inv)">{{inv.name}}</span>
          </div>
          
       </div>
       
       <div class=" col-md-4 col-lg-2 " style="margin-bottom: 20px;cursor: pointer;">
  
-        <div style="border: 2px solid purple;
+        <div style="border: 2px solid rgb(224, 140, 224);
         text-align: center;
         height: 7vw;
         padding-top: 2vw;">
@@ -46,6 +46,14 @@
 
 
 </div>
+
+<app-inventory-page  *ngIf="showInventory"
+  (goBackEvent)="showInventory = !showInventory"
+  [inventory]="inventory">
+
+</app-inventory-page>
+
+<app-loader *ngIf="isLoading"></app-loader>
 
 
 

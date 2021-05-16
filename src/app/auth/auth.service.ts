@@ -25,13 +25,14 @@ export class AuthService extends CrudService {
     public async login(email: string, password: string) {
         try {
             this.endpoint = 'user/login';
-            var response = await this.post({ email, password });
+            let response = await this.post({ email, password });
             this.token = response.token;
             console.log('response after log in',response)
             this.storage.save(AUTH_TOKEN, this.token);
             this.storage.save(USER,response.user)
-            if(this.isLogged())
+            if(this.isLogged()) {
             this.redirectUrl = 'nav';
+            }
             return this.redirectUrl;
         } catch (error) {
             console.error('Error during login request', error);
@@ -42,7 +43,7 @@ export class AuthService extends CrudService {
     public async signup(username: string, email: string, password: string) {
         try {
             this.endpoint = 'user/register';
-            var response = await this.post({username, email, password });
+            let response = await this.post({username, email, password });
             console.log('signup response is',response)
             return response;
         } catch (error) {

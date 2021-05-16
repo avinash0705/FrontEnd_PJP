@@ -22,7 +22,7 @@ export class UserService extends CrudService {
   public async getInventories() {
     try {
         this.endpoint = 'inventory';
-        var response = await this.getList();
+        const response = await this.getList();
        
         return response;
     } catch (error) {

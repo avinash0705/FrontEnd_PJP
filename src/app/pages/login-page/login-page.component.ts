@@ -48,8 +48,9 @@ export class LoginPageComponent implements OnInit {
                 password,
             ));
             console.log('repsonse is', response);
-            if(response.success!=undefined)
-            this.changeUiPanel();            
+            if(response.success!=undefined) {
+            this.changeUiPanel();
+            }            
         } catch (e) {
 
             this.errorMessage = e.error.message;

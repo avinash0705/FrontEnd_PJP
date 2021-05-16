@@ -1,0 +1,17 @@
+<div *ngIf="!isLoading" class="container">
+
+  <div class="row" style="text-align: center;">
+      <div class="col-sm-12">
+        <h3>id : {{inventory.id}}</h3>
+        <h4>Name : {{inventory.name}}</h4>
+      </div>
+  </div>
+  
+</div>
+
+<button mat-raised-button style="    width: 105px;
+height: 56px;" (click)="goback()">
+  go back
+</button>
+  
+<app-loader *ngIf="isLoading"></app-loader>

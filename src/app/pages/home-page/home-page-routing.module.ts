@@ -1,13 +1,21 @@
-import { HomePageComponent } from './home-page.component';
-
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { HomePageComponent } from './home-page.component';
 
 const routes: Routes = [
     {
         path: '',
         data: { shouldReuse: true, key: 'home' },
         component: HomePageComponent,
+    },
+
+    {
+        path: 'inventory/:id',
+        loadChildren: () =>
+            import('../inventory-page/inventory-page.module').then(
+                m => m.InventoryPageModule,
+            ),
+        data: { title: 'Child', isChild: true },
     },
 ];
 
