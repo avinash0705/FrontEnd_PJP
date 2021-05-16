@@ -27,7 +27,7 @@ export class AuthService extends CrudService {
             this.endpoint = 'user/login';
             var response = await this.post({ email, password });
             this.token = response.token;
-
+            console.log('response after log in',response)
             this.storage.save(AUTH_TOKEN, this.token);
             this.storage.save(USER,response.user)
             if(this.isLogged())

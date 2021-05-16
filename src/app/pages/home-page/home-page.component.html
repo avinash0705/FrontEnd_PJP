@@ -1,3 +1,53 @@
-<p>
-  home-page works!
-</p>
+<div class="main-content">
+
+
+
+  <div class="row" style="text-align: center;">
+    <h2>Your Inventory</h2>
+  </div>
+
+  <div class="container">
+    <div class="row inventory" style="display: flex; padding: 20px;">
+
+      <div class=" col-md-4 col-lg-2 " *ngFor="let inv of userInventories" style="margin-bottom: 20px;margin-right: 2px; cursor: pointer;">
+ 
+         <div style="border: 2px solid purple;
+         text-align: center;
+         height: 7vw;
+         padding-top: 2vw;">
+          <span style="font-size: 2vw;">{{inv.name}}</span>
+         </div>
+         
+      </div>
+      
+      <div class=" col-md-4 col-lg-2 " style="margin-bottom: 20px;cursor: pointer;">
+ 
+        <div style="border: 2px solid purple;
+        text-align: center;
+        height: 7vw;
+        padding-top: 2vw;">
+         <span style="font-size: 2vw;">ADD  +</span>
+        </div>
+        
+      </div>
+     
+ 
+    </div>
+  </div>
+
+  
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+

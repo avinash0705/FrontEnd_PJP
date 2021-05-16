@@ -15,6 +15,8 @@ export class LoginPageComponent implements OnInit {
     loginUI = true;
     signUpUI = false;
 
+    rightPanel = false;
+
     constructor(private authService: AuthService, private router: Router) {}
 
     ngOnInit() {
@@ -44,10 +46,13 @@ export class LoginPageComponent implements OnInit {
                 name,
                 email,
                 password,
-            ))as string;
-            this.changeToLoginUI();            
+            ));
+            console.log('repsonse is', response);
+            if(response.success!=undefined)
+            this.changeUiPanel();            
         } catch (e) {
-            this.errorMessage = 'Something Went Wrong!';
+
+            this.errorMessage = e.error.message;
             console.error('Unable to Signup!\n', e);
         }
     }
@@ -57,13 +62,9 @@ export class LoginPageComponent implements OnInit {
         this.router.navigate([url], { replaceUrl: true });
     }
 
-    changeToSignupUi() {
-        this.loginUI = false;
-        this.signUpUI = true;
-    }
-
-    changeToLoginUI() {
-        this.signUpUI = false;
-        this.loginUI = true;
+    changeUiPanel()
+    {
+        this.rightPanel = !this.rightPanel;
+        this.errorMessage = '';
     }
 }

@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
 import {
     HttpEvent,
     HttpHandler,
     HttpInterceptor,
-    HttpRequest,
+    HttpRequest
 } from '@angular/common/http';
-import { AuthService } from '../../../auth/auth.service';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { AuthService } from '../../../auth/auth.service';
 
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
@@ -20,7 +20,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 
         if (token) {
             req = req.clone({
-                setHeaders: { Authorization: `Bearer ${token}` },
+                setHeaders: { Authorization: `${token}` },
             });
         }
 

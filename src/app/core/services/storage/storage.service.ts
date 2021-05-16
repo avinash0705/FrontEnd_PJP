@@ -18,6 +18,7 @@ export class StorageService {
 
     public read(key: StorageKey): any {
         const value = this.storage.getItem(key);
+        console.log('value is',value)
         return JSON.parse(value);
     }
 

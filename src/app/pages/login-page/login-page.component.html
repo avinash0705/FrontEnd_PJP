@@ -1,4 +1,4 @@
-<div class="login-page" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="50px">
+<!-- <div class="login-page" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="50px">
     <div class="logo-container" fxFlexAlign="center">
         <app-logo></app-logo>
     </div>
@@ -78,4 +78,45 @@
     </mat-card>
 
     
+</div> -->
+
+
+<div class="customBody">
+
+    <div class="container" id="container"  [class.right-panel-active] = "rightPanel === true">
+        <div class="form-container sign-up-container">
+            <form (keyup.enter)="signup(name,email, password)">
+                <h1>Create Account</h1>
+                
+                <input name="name" [(ngModel)]="name" type="text" placeholder="Name" />
+                <input  name="email" [(ngModel)]="email" type="email" placeholder="Email" />
+                <input  name="password" [(ngModel)]="password" type="password" placeholder="Password" />
+                <button (click)="signup(name,email, password)" type="submit">Sign Up</button>
+                <mat-error [textContent]="errorMessage"></mat-error>
+            </form>
+            
+        </div>
+        <div class="form-container sign-in-container">
+            <form  (keyup.enter)="login(email, password)">
+                <h1>Sign in</h1>
+                <input  name="email"  [(ngModel)]="email" type="email" placeholder="Email" />
+                <input  name="password" [(ngModel)]="password" type="password" placeholder="Password" />
+                <button (click)="login(email, password)" type="submit">Sign In</button>
+                <mat-error [textContent]="errorMessage"></mat-error>
+            </form>
+            
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Let’s Buy and Sell Stocks.</h1>
+                    <button class="ghost" id="signIn" (click)="changeUiPanel()">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Let’s Buy and Sell Stocks.</h1>
+                    <button class="ghost" id="signUp" (click)="changeUiPanel()">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
