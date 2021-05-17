@@ -15,8 +15,9 @@ export class InventoryPageComponent implements OnInit {
    }
   id : any;
   isLoading = false;
-  newProductName="";
+  newProductName='';
   @Output() goBackEvent = new EventEmitter<any>();
+  @Output() addProductEvent = new EventEmitter<any>();
   @Input() inventory :any;
   ngOnInit() {
     this.isLoading = true; 
@@ -28,9 +29,10 @@ export class InventoryPageComponent implements OnInit {
 
   deleteProduct(product:any)
   { 
-    if(!window.confirm('Product will be deleted!, Proceed??'))
+    if(!window.confirm('Product will be deleted!, Proceed??')) {
     return;
-    let delIdx = this.inventory.products.findIndex(p => p.id === product.id);
+    }
+    const delIdx = this.inventory.products.findIndex(p => p.id === product.id);
 
     this.inventory.products.splice(delIdx,1);
   }
@@ -43,7 +45,8 @@ export class InventoryPageComponent implements OnInit {
   }
 
   addProduct()
-  {
+  { 
+    this.addProductEvent.emit();
     console.log('add product dialog box opened')
   }
 

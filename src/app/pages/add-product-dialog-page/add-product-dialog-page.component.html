@@ -1,0 +1,43 @@
+
+
+  <mat-dialog-content style="font-size: large;">
+
+    <div class="row" style="text-align: center;">
+      <h4>Add Product</h4>
+    </div>
+    <div style="margin: 60px;">
+    
+  
+  
+      <mat-form-field style="padding-right: 20px;">
+        <mat-label>Enter Product Name</mat-label>
+        <input matInput type="text"
+                placeholder="Product Name"
+               [(ngModel)]="newProductName">
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Enter Product Type</mat-label>
+        <input matInput type="text"
+                placeholder="Product Type"
+               [(ngModel)]="newProductType">
+      </mat-form-field>
+  
+   
+  
+  
+  
+  
+  </div>
+  </mat-dialog-content>
+  
+  
+  <mat-dialog-actions style="float: right;">
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button [disabled]="isDisabled()" class="mat-raised-button mat-primary"(click)="save()">Save</button>
+  </mat-dialog-actions>
+  
+
+
+
+
