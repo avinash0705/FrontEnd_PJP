@@ -6,12 +6,63 @@
         <h4>Name : {{inventory.name}}</h4>
       </div>
   </div>
+
   
+  
+  
+    <div class="row">
+
+      <div class="col-sm-6">
+        <button mat-raised-button style="border: 1px solid #e6b2e6;    width: 105px;
+        height: 56px;" (click)="goback()">
+          go back
+        </button>
+      </div>
+      <div class="col-sm-6">
+        <button mat-raised-button style="width: 105px;height: 56px;float: right; border: 1px solid #e6b2e6;" 
+          (click)="addProduct()">
+          Add Product
+        </button>
+      </div>
+    </div>
+
+    
+
+    
+
+
+
+   <table class="table table-striped" style="font-size: large;">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Pid</th>
+      <th scope="col">name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ele of inventory.products; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      
+      <td>{{ele.id }}</td>
+      <td>{{ele.name }}</td>
+      <td><mat-icon style="cursor: pointer;" (click)="deleteProduct(ele)" >delete</mat-icon></td>
+    </tr>
+    
+    </tbody>
+  </table>
+
+
+  
+
+
 </div>
 
-<button mat-raised-button style="    width: 105px;
-height: 56px;" (click)="goback()">
-  go back
-</button>
+
+
+
+
+
+
   
 <app-loader *ngIf="isLoading"></app-loader>

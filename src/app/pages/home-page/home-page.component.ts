@@ -13,6 +13,8 @@ export class HomePageComponent implements OnInit {
 
     user: any;
     userInventories =[];
+    displayedColumns:any;
+    dataSource:any;
     isLoading =true;
     showInventory: boolean =false;
     inventory :any;
@@ -31,21 +33,20 @@ export class HomePageComponent implements OnInit {
 
 
         this.userInventories = [
-            {id:'PC01',name : 'Stationary', type: 'student products', products : ['Cello pen', 'spiral notebook','eraser']},
-            {id:'rdC01',name : 'Sports', type: 'student products', products : ['football', 'bat', 'volleyball']},
-            {id:'WWC01',name : 'General', type: 'daily products', products : ['general product 1','gen product 2']},
-            {id:'ETC01',name : 'Stationary', type: 'student products', products : ['Cello pen', 'spiral notebook','eraser']},
-            {id:'EWC01',name : 'Sports', type: 'student products', products : ['football', 'bat', 'volleyball']},
-            {id:'PC01',name : 'General', type: 'daily products', products : ['general product 1','gen product 2']},
-            {id:'PC01',name : 'Stationary', type: 'student products', products : ['Cello pen', 'spiral notebook','eraser']},
-            {id:'PC01',name : 'Sports', type: 'student products', products : ['football', 'bat', 'volleyball']},
-            {id:'PC01',name : 'General', type: 'daily products', products : ['general product 1','gen product 2']},
+            {id:'PC01',name : 'Stationary', type: 'student products', products : [{id:'001',name:'Cello pen'},{id:'002',name: 'spiral notebook'}]},
+            {id:'rdC01',name : 'Sports', type: 'student products', products : [{id:'005', name:'football'}, {id:'00332',name:'volleyball'}]},
+            {id:'WWC01',name : 'General', type: 'daily products', products : [{id:'0098',name:'general product 1'},{id:'00873',name:'gen product 2'}]},
+               
+    
+         
         ]
 
         setTimeout(() => {
             this.isLoading = false;
           },2000);
         console.log('inventories', this.userInventories);
+
+        this.displayedColumns = ['id', 'name'];
         
     
     }
