@@ -1,8 +1,8 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { MatCardModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxSpinnerModule } from "ngx-spinner";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavModule } from './core/components/nav/nav.module';
@@ -16,7 +16,7 @@ import { HttpConfigInterceptor } from './core/services/http/interceptor.service'
         AppRoutingModule,
         NavModule,
         HttpClientModule,
-        NgxSpinnerModule
+        MatCardModule
     ],
     providers: [
         {

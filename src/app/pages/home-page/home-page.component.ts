@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from "ngx-spinner";
 import { StorageKey } from 'src/app/core/services/storage/storage.model';
 import { StorageService } from 'src/app/core/services/storage/storage.service';
 import { UserService } from 'src/app/core/services/user/user.service';
@@ -9,7 +8,6 @@ const { USER } = StorageKey;
     selector: 'app-home-page',
     templateUrl: './home-page.component.html',
     styleUrls: ['./home-page.component.scss'],
-    providers: [NgxSpinnerService]
 })
 export class HomePageComponent implements OnInit {
 
@@ -18,14 +16,14 @@ export class HomePageComponent implements OnInit {
     isLoading =true;
     showInventory: boolean =false;
     inventory :any;
+    newInventoryName='';
+    newInventoryType='';
 
-
-    constructor(private storage : StorageService, private userService: UserService, private router: Router, private SpinnerService: NgxSpinnerService) {}
+    constructor(private storage : StorageService, private userService: UserService, private router: Router) {}
 
 
 
     ngOnInit() {
-        this.SpinnerService.show();
         this.isLoading = true;
         
         this.user = this.storage.read(USER);
@@ -61,5 +59,29 @@ export class HomePageComponent implements OnInit {
 
         console.log('navigate to inventory');
        // this.router.navigate(['nav/home/inventory',id]);
+    }
+
+
+    deleteInventory(inventory :any)
+    {
+        if(!window.confirm('All the products inside the inventory will be deleted!, Proceed??'))
+        return;
+
+        var invIdx = this.userInventories.findIndex(inv => inv.id === inventory.id);
+
+        this.userInventories.splice(invIdx,1);
+
+
+    }
+
+    resetField()
+    {
+        this.newInventoryName = '';
+        this.newInventoryType = '';
+    }
+
+    save()
+    {
+        this.userInventories.push({'id':'PC'+this.userInventories.length.toString(), name:this.newInventoryName, type: this.newInventoryType, products : []});
     }
 }

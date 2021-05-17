@@ -9,24 +9,45 @@
   <div class="container">
     <div class="row inventory" style="display: flex; padding: 20px;">
 
-      <div class=" col-md-4 col-lg-2 " *ngFor="let inv of userInventories" style="margin-bottom: 20px;margin-right: 2px; cursor: pointer;">
- 
-         <div style="border: 2px solid purple;
-         text-align: center;
-         height: 7vw;
-         padding-top: 2vw;">
+      <div class=" col-md-4 col-lg-2 item " *ngFor="let inv of userInventories" style="margin-bottom: 20px;margin-right: 2px; cursor: pointer;">
+          <mat-icon (click)="deleteInventory(inv)" style="float: right;margin:7px ;">delete</mat-icon>
+         <div  style="border-radius: 20px; border: 2px solid purple;text-align: center;height: 7vw;padding-top: 2vw;">
           <span style="font-size: 2vw;" (click)="openInventory(inv)">{{inv.name}}</span>
          </div>
+
+         <mat-card style="text-align: center;">
+          <h4>{{inv.type}}</h4>
+        </mat-card>
          
       </div>
       
-      <div class=" col-md-4 col-lg-2 " style="margin-bottom: 20px;cursor: pointer;">
+      <div class=" col-md-4 col-lg-2 " style="margin-bottom: 20px;">
  
-        <div style="border: 2px solid rgb(224, 140, 224);
-        text-align: center;
-        height: 7vw;
-        padding-top: 2vw;">
-         <span style="font-size: 2vw;">ADD  +</span>
+        <div style="text-align: center;
+        height: 8vw;">
+
+        <mat-card style="width: 222px;">
+          <mat-card-title>Add new Inventory</mat-card-title>
+          <mat-card-content>
+
+            <mat-form-field>
+              <mat-label>Enter name</mat-label>
+              <input matInput placeholder="new Name" 
+              type="text" [(ngModel)]="newInventoryName">
+            </mat-form-field> 
+            <mat-form-field>
+              <mat-label>Enter type</mat-label>
+              <input matInput placeholder="inv type" 
+              type="text" [(ngModel)]="newInventoryType">
+            </mat-form-field>
+    
+             <button mat-button (click)="resetField()">reset</button>
+             <button mat-button color="primary" (click)="save()">save</button>
+
+
+          </mat-card-content>
+        </mat-card>
+        
         </div>
         
       </div>
