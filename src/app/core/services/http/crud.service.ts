@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 export abstract class CrudService<T = any> {
     abstract endpoint;
-    url = 'http://localhost:5000';
+    url = 'https://backend-deploy-pjp.herokuapp.com';
 
     protected constructor(protected http: HttpClient) {}
 
