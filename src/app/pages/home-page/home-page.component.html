@@ -12,7 +12,7 @@
       <div class=" col-md-4 col-lg-2 item " *ngFor="let inv of userInventories" style="margin-bottom: 20px;margin-right: 2px; cursor: pointer;">
           <mat-icon (click)="deleteInventory(inv)" style="float: right;margin:7px ;">delete</mat-icon>
          <div  style="border-radius: 20px; border: 2px solid purple;text-align: center;height: 7vw;padding-top: 2vw;">
-          <span style="font-size: 2vw;" (click)="openInventory(inv)">{{inv.name}}</span>
+          <span style="font-size: 14px; overflow:hidden;max-width: 20px;" (click)="openInventory(inv)">{{inv.name}}</span>
          </div>
 
          <mat-card style="text-align: center;">

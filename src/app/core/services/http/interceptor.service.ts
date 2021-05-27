@@ -24,6 +24,8 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             });
         }
 
+        console.log('token added in each request in header', req)
+
         return next.handle(req);
     }
 }

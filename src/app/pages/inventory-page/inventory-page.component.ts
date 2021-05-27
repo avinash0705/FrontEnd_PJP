@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 
 
@@ -10,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class InventoryPageComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,private userService:UserService) {
         
    }
   id : any;
@@ -23,7 +24,18 @@ export class InventoryPageComponent implements OnInit {
     this.isLoading = true; 
 
     console.log('passed inventory is ', this.inventory)
-    this.isLoading = false;
+    this.inventory.products = [];
+    this.userService.getProductList().then(value => {
+      console.log('all products are',value);
+      this.inventory.products = value;
+      this.inventory.products =  this.inventory.products.filter((product) => {return product.currentInventory === this.inventory._id})
+      console.log('this inventory is', this.inventory)
+      console.log('this inventory products are', this.inventory.products)
+      this.isLoading = false;
+    },error => {
+      console.log(error)
+      this.isLoading = false;
+    })
     
   }
 
@@ -34,7 +46,19 @@ export class InventoryPageComponent implements OnInit {
     }
     const delIdx = this.inventory.products.findIndex(p => p.id === product.id);
 
-    this.inventory.products.splice(delIdx,1);
+    let id  = this.inventory.products[delIdx]._id;
+    this.isLoading = true;
+    this.userService.deleteProductById(id).then(value =>{
+      console.log('deleted product is', value.id);
+
+      this.inventory.products.splice(delIdx,1);
+      this.isLoading = false;
+    },
+    error =>{
+      console.log(error);
+      this.isLoading =false;
+    });
+
   }
 
   goback()

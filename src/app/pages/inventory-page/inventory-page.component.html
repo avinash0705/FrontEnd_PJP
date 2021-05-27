@@ -37,17 +37,22 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Pid</th>
-      <th scope="col">name</th>
-      <th scope="col">type</th>
+      <th scope="col">Name</th>
+      <th scope="col">Desc</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Status</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let ele of inventory.products; index as i">
       <th scope="row">{{ i + 1 }}</th>
       
-      <td>{{ele.id }}</td>
+      <td>{{ele._id }}</td>
       <td>{{ele.name }}</td>
-      <td>{{ele.type }}</td>
+      <td>{{ele.description }}</td>
+      <td>{{ele.quantity }}</td>
+      <td>{{ele.price }}</td>
       <td><mat-icon style="cursor: pointer;" (click)="deleteProduct(ele)" >delete</mat-icon></td>
     </tr>
     

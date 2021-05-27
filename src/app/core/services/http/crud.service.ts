@@ -19,7 +19,7 @@ export abstract class CrudService<T = any> {
     }
 
     public async getList(): Promise<T[] | null> {
-        return this.get<T[]>('list');
+        return this.get<T[]>('');
     }
 
     public async getById(id: number | string): Promise<T | null> {

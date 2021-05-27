@@ -12,13 +12,15 @@ export class AddProductDialogPageComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) data) { }
     
     newProductName = '';
-    newProductType = '';
+    newProductDescription = '';
+    quantity = 0;
+    price = '0';
 
   ngOnInit() {
   }
 
   save() {
-    this.dialogRef.close({data : {name : this.newProductName, type: this.newProductType}});
+    this.dialogRef.close({data : {name : this.newProductName, description: this.newProductDescription,quantity : this.quantity,price : this.price}});
   }
 
   close() {
@@ -27,7 +29,7 @@ export class AddProductDialogPageComponent implements OnInit {
 
   isDisabled()
   {
-    return (this.newProductName === '' || this.newProductType === '');
+    return (this.newProductName === '' || this.newProductDescription === '' || this.quantity === 0 || this.price === '0');
   }
 
 }

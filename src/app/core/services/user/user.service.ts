@@ -21,7 +21,7 @@ export class UserService extends CrudService {
 
   public async getInventories() {
     try {
-        this.endpoint = 'inventory';
+        this.endpoint = 'user/Inventory';
         const response = await this.getList();
        
         return response;
@@ -29,6 +29,94 @@ export class UserService extends CrudService {
         console.error('Error during login request', error);
         return Promise.reject(error);
     }
+}
+
+
+public async addInventory(reqData) {
+  try {
+      this.endpoint = 'user/Inventory';
+      const response = await this.post(reqData);
+     
+      return response;
+  } catch (error) {
+      console.error('Error during login request', error);
+      return Promise.reject(error);
+  }
+} 
+
+public async deleteInventory(id) {
+  try {
+      this.endpoint = 'user/Inventory';
+      const response = await this.deleteById(id);
+     
+      return response;
+  } catch (error) {
+      console.error('Error during login request', error);
+      return Promise.reject(error);
+  }
+} 
+
+public async getInventoryById(id) {
+  try {
+      this.endpoint = 'user/Inventory';
+      const response = await this.getById(id);
+     
+      return response;
+  } catch (error) {
+      console.error('Error during login request', error);
+      return Promise.reject(error);
+  }
+}
+
+
+public async addProduct(reqObj) {
+  try {
+      this.endpoint = 'user/Product';
+      const response = await this.post(reqObj);
+     
+      return response;
+  } catch (error) {
+      console.error('Error during login request', error);
+      return Promise.reject(error);
+  }
+}    
+
+
+public async getProductList() {
+  try {
+      this.endpoint = 'user/Product';
+      const response = await this.get('');
+     
+      return response;
+  } catch (error) {
+      console.error('Error during login request', error);
+      return Promise.reject(error);
+  }
+}  
+
+
+public async getProductById(id) {
+  try {
+      this.endpoint = 'user/Product';
+      const response = await this.getById(id);
+     
+      return response;
+  } catch (error) {
+      console.error('Error during login request', error);
+      return Promise.reject(error);
+  }
+}  
+
+public async deleteProductById(id) {
+  try {
+      this.endpoint = 'user/Product';
+      const response = await this.deleteById(id);
+     
+      return response;
+  } catch (error) {
+      console.error('Error during login request', error);
+      return Promise.reject(error);
+  }
 }
 
 

@@ -36,26 +36,24 @@ export class HomePageComponent implements OnInit {
         this.isLoading = true;
         
         this.user = this.storage.read(USER);
-        // this.userInventories  = this.userService.getInventories();
+
+        this.userService.getInventories().then( value => {
+            console.log('recieved value invetnory is', value)
+            this.userInventories = value;
+            this.isLoading = false;
+
+        }, error => {
+            console.log(error);
+            this.isLoading = false;
+
+        });
 
 
-        this.userInventories = [
-            {id:'PC01',name : 'Stationary', type: 'student products', 
-                products : [{id:'001',name:'Cello pen',type:'type1'},
-                            {id:'002',name: 'spiral notebook',type:'type2'}]},
-            
-            {id:'SCF02',name : 'Sports', type: 'sports products', 
-            products : [{id:'001',name:'ball',type:'type1'},
-                        {id:'002',name: 'volley ball',type:'type2'}]},
-
-            {id:'23C1',name : 'Stationary', type: 'student products', 
-            products : [{id:'001',name:'Cello pen',type:'type1'},
-                        {id:'002',name: 'spiral notebook',type:'type2'}]},
-        ]
+        
 
         setTimeout(() => {
             this.isLoading = false;
-          },2000);
+          },3000);
         console.log('inventories', this.userInventories);
 
         this.displayedColumns = ['id', 'name'];
@@ -83,7 +81,13 @@ export class HomePageComponent implements OnInit {
 
         const invIdx = this.userInventories.findIndex(inv => inv.id === inventory.id);
 
-        this.userInventories.splice(invIdx,1);
+        let id = this.userInventories[invIdx]._id;
+
+        this.isLoading = true;
+        this.userService.deleteInventory(id).then(value => 
+            {console.log('inventory delete is', value);this.ngOnInit();this.isLoading = false},error => {
+            this.isLoading =false;
+        })
 
 
     }
@@ -96,8 +100,20 @@ export class HomePageComponent implements OnInit {
 
     save()
     {
-        this.userInventories.push({id:'PC'+this.userInventories.length.toString(), name:this.newInventoryName, type: this.newInventoryType, products : []});
+        //this.userInventories.push({id:'PC'+this.userInventories.length.toString(), name:this.newInventoryName, type: this.newInventoryType, products : []});
+        this.isLoading = true;
+        let data = {
+            name : this.newInventoryName,
+            type : this.newInventoryType
+        }
+        this.userService.addInventory(data).then(value => {console.log('added data is',value);
+        this.userService.getInventoryById(value.id).then(res => {
+            this.userInventories.push(res);
+        }) 
+        this.isLoading = false;},error => {console.log(error); this.isLoading = false;});
         this.resetField();
+
+       
     }
 
     isDisabled()
@@ -132,7 +148,7 @@ export class HomePageComponent implements OnInit {
         {
             if(data.data!=undefined)
             {
-                    this.addNewProduct(data.data.name, data.data.type);
+                    this.addNewProduct(data.data.name, data.data.description,data.data.quantity,data.data.price);
             }
             console.log("Dialog output:", data)
         }
@@ -140,9 +156,33 @@ export class HomePageComponent implements OnInit {
         );    
     }
 
-    addNewProduct(name:String, type:String)
-    {   
-        this.inventory.products.push({id: 'PC00'+(this.inventory.products.length + 1).toString(), name:name, type:type});
-        console.log('new product added to backend!!!'); /// this will be implemented once backend api will be ready;
+    addNewProduct(name:String, description:String,quantity : number, price : string)
+    {    
+        console.log('data receinved is', name)
+        //this.inventory.products.push({id: 'PC00'+(this.inventory.products.length + 1).toString(), name:name, description:description});
+
+        let data = {
+            id : this.inventory['_id'],
+            name : name,
+            description : description,
+            quantity : quantity,
+            price : price
+        }
+        console.log('new product added to backend!!!,',data); /// this will be implemented once backend api will be ready;
+
+        this.isLoading = true;
+        this.userService.addProduct(data).then(value => {
+            console.log('added product id is', value);
+
+            this.userService.getProductById(value.id).then(value => {
+                this.inventory.products.push(value);
+                this.isLoading = false;
+            },err => {console.log(err);this.isLoading = false});
+
+        });
+
+
+
+
     }
 }
